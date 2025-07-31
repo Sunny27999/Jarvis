@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarvis Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#00ffc3" />
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js')
+      .then(() => console.log('✅ Service Worker Registered'))
+      .catch(err => console.log('❌ SW Error', err));
+  }
+</script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background-color: #1e1e2f;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0; padding: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; height: 100vh;
+    }
+    h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; }
+    #chat-box {
+      width: 100%; max-width: 600px;
+      flex: 1; overflow-y: auto;
+      background-color: #2e2e3e;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .user, .bot { margin: 10px 0; word-wrap: break-word; }
+    .user { text-align: right; color: #00ffc3; }
+    .bot { text-align: left; color: #ffffff; }
+    #input-area {
+      display: flex; width: 100%; max-width: 600px; gap: 8px;
+    }
+    #message {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #00ffc3;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background-color: #00c9a3; }
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      #input-area { flex-direction: column; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 Jarvis Assistant</h1>
+  <div id="chat-box"></div>
+  <div id="input-area">
+    <input type="text" id="message" placeholder="Type or speak your message...">
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="startListening()"><i class="fas fa-microphone"></i></button>
+  </div>
+  <script src="/static/main.js"></script>
+</body>
+</html>
